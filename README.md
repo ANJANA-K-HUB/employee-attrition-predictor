@@ -13,7 +13,10 @@ Instead of treating the model as a black box, this application explicitly calcul
 - **Interactive Frontend:** Clean and responsive web interface built using HTML, CSS, and Jinja2 templates.
 
 ---
+## 📱 Application Interface
 
+![Employee Attrition App UI](images/app_screenshot_1.png)
+---
 ## 🛠️ Installation & Setup
 
 ### 1. Clone the Repository
