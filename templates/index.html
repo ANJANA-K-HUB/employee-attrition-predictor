@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HR Attrition Prediction Platform</title>
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 30px; background-color: #f0f2f5; }
+        .wrapper { max-width: 550px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin: auto; }
+        h2 { text-align: center; color: #1e293b; margin-bottom: 25px; }
+        label { font-weight: 600; color: #475569; display: block; margin-top: 14px; }
+        input, select { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background: #0f172a; color: white; border: none; border-radius: 6px; font-size: 16px; margin-top: 25px; cursor: pointer; }
+        button:hover { background: #1e293b; }
+        .output-box { text-align: center; margin-top: 25px; padding: 15px; border-radius: 6px; font-size: 18px; font-weight: bold; }
+        .attrition-risk { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .attrition-safe { background-color: #dcfce7; color: #166534; border: 1px solid #86efac; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h2>Employee Attrition Risk Engine</h2>
+    <form action="/predict" method="POST">
+        
+        <label>Environment Satisfaction (1-4):</label>
+        <select name="EnvironmentSatisfaction" required>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - High</option>
+            <option value="4">4 - Very High</option>
+        </select>
+
+        <label>Job Satisfaction (1-4):</label>
+        <select name="JobSatisfaction" required>
+            <option value="1">1 - Low</option>
+            <option value="2">2 - Medium</option>
+            <option value="3">3 - High</option>
+            <option value="4">4 - Very High</option>
+        </select>
+
+        <label>Monthly Income ($):</label>
+        <input type="number" name="MonthlyIncome" placeholder="e.g. 5000" min="1000" max="30000" required>
+
+        <label>Works Overtime?</label>
+        <select name="OverTime" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>Total Working Years:</label>
+        <input type="number" name="TotalWorkingYears" placeholder="e.g. 8" min="0" max="40" required>
+
+        <label>Years at Current Company:</label>
+        <input type="number" name="YearsAtCompany" placeholder="e.g. 3" min="0" max="40" required>
+
+        <label>Work Life Balance (1-4):</label>
+        <select name="WorkLifeBalance" required>
+            <option value="1">1 - Bad</option>
+            <option value="2">2 - Good</option>
+            <option value="3">3 - Better</option>
+            <option value="4">4 - Best</option>
+        </select>
+
+        <button type="submit">Analyze Retention Risk</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="output-box {% if 'High Attrition' in prediction_text %}attrition-risk{% else %}attrition-safe{% endif %}">
+            {{ prediction_text }}
+        </div>
+    {% endif %}
+
+    <!-- Day 26/27 Syllabus Requirement: Displaying the AI Reasons -->
+    {% if explanation_text %}
+        <p style="margin-top: 10px; color: #555; font-size: 0.95em; border-top: 1px dashed #cca3a3; padding-top: 10px;">
+        <strong>AI Insight (SHAP):</strong> {{ explanation_text }}
+        </p>
+    {% endif %}
+</div>
+
+</body>
+</html>
