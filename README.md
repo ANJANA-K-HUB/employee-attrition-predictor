@@ -15,7 +15,7 @@ Instead of treating the model as a black box, this application explicitly calcul
 ---
 ## 📱 Application Interface
 
-![Employee Attrition App UI](images/screenshot_2.png)
+![Employee Attrition App UI](images/Screenshot_2.png)
 ---
 ## 🛠️ Installation & Setup
 
